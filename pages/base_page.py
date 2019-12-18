@@ -4,7 +4,7 @@ from selenium.common.exceptions import NoSuchElementException, \
     TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from .locators import BasePageLocators
+from .locators import BasePageLocators, MainPageLocators
 
 
 class BasePage:
@@ -18,6 +18,10 @@ class BasePage:
 
     def go_to_login_page(self):
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK_INVALID)
+        link.click()
+
+    def go_to_cart_page(self):
+        link = self.browser.find_element(*MainPageLocators.CART_LINK)
         link.click()
 
     def should_be_login_link(self):

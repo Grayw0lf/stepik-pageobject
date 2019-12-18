@@ -1,6 +1,7 @@
 import pytest
 from .pages.product_page import ProductPage
 from .pages.login_page import LoginPage
+from .pages.cart_page import CartPage
 
 
 product_link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
@@ -56,3 +57,13 @@ def test_message_disappeared_after_adding_product_to_cart(browser):
     cart.open()
     cart.add_to_cart()
     cart.success_message_is_disappeared()
+
+
+@pytest.mark.cart
+def test_guest_cant_see_product_in_cart_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_cart_page()
+    c_page = CartPage(browser, browser.current_url)
+    c_page.cart_page()
